@@ -1,13 +1,13 @@
 /* 
 mmP4Stream(
-  parentStream: "//core/perforcetest-fauzi",
-  childStream: "//core/perforcetest-fauzi-unreal-v0.1.0"
+  parentStream: "//depotStream/mainline",
+  childStream: "//depotStream/unreal-v0.1.0"
 )
 */
 def call(LinkedHashMap config) { 
   def p4Object = [:]
   try{
-    p4creds = '4e7ac971-ac41-4a92-8914-c42f8bfd785e'
+    p4creds = 'perforce-local'
     
     // p4 definition
     def p4def = p4(
@@ -15,7 +15,7 @@ def call(LinkedHashMap config) {
       workspace: [
         $class: 'StreamWorkspaceImpl', 
         charset: 'none', 
-        format: 'jenkins-${NODE_NAME}-${JOB_NAME}-${EXECUTOR_NUMBER}', 
+        format: 'jenkins-${JOB_NAME}-${EXECUTOR_NUMBER}', 
         pinHost: false, 
         streamName: config.parentStream
       ]
