@@ -7,7 +7,7 @@ pipeline {
         stage('Release to Perforce') {
             steps{
                 script{
-                    def childStream = "unreal" + "v0.1.0"
+                    def childStream = "//" + "unreal" + "-" + "v0.1.0"
                     def parentStream = "//depotStream/mainline"
                     def createNewStream = sdkRelease(
                         parentStream: parentStream,
