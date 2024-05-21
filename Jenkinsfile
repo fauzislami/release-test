@@ -6,10 +6,9 @@ pipeline {
     stages {
         stage('Clean up workspace') {
             steps {
-                workspace = env.WORKSPACE
                 sh """
-                echo ${workspace}
-                cd ${workspace}
+                echo ${env.WORKSPACE}
+                cd ${env.WORKSPACE}
                 rm -rf * .*
                 """
             }
