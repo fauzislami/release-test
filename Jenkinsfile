@@ -2,19 +2,8 @@
 
 pipeline {
     agent any
-    options { skipDefaultCheckout() }
 
     stages {
-        stage('Clean up workspace') {
-            steps {
-                sh """
-                echo ${env.WORKSPACE}
-                cd ${env.WORKSPACE}
-                rm -rf *
-                rm -rf .*
-                """
-            }
-        }
         stage('Release to Perforce') {
             steps{
                 script{
