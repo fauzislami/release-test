@@ -2,6 +2,7 @@
 
 pipeline {
     agent any
+    options { skipDefaultCheckout() }
 
     stages {
         stage('Clean up workspace') {
