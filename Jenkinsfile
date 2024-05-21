@@ -6,7 +6,11 @@ pipeline {
     stages {
         stage('Clean up workspace') {
             steps {
-                sh "rm -rf * .*"
+                def workspace = env.WORKSPACE
+                sh """
+                cd ${workspace}
+                rm -rf * .*
+                """
             }
         }
         stage('Release to Perforce') {
