@@ -11,8 +11,7 @@ pipeline {
                     def childStream = "//depotStream/" + "unreal" + "-" + "v0.1.0"
                     def createNewStream = sdkRelease(
                         parentStream: parentStream,
-                        childStream: childStream,
-                        p4creds: 'perforce-local'
+                        childStream: childStream
                     )
 
                     if(createNewStream.isFailed){
