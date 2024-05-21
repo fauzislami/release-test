@@ -4,6 +4,11 @@ pipeline {
     agent any
 
     stages {
+        stage('Clean up workspace') {
+            steps {
+                sh "rm -rf * .*"
+            }
+        }
         stage('Release to Perforce') {
             steps{
                 script{
