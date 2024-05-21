@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Clean up workspace') {
             steps {
-                def workspace = env.WORKSPACE
+                workspace = env.WORKSPACE
                 sh """
                 echo ${workspace}
                 cd ${workspace}
