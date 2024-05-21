@@ -10,7 +10,8 @@ pipeline {
                 sh """
                 echo ${env.WORKSPACE}
                 cd ${env.WORKSPACE}
-                rm -rf * .*
+                rm -rf *
+                rm -rf .*
                 """
             }
         }
