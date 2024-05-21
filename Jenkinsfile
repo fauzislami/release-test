@@ -12,7 +12,7 @@ pipeline {
                     def createNewStream = sdkRelease(
                         parentStream: parentStream,
                         childStream: childStream,
-                        p4creds: 'perforce-local'
+                        p4creds: "perforce-local"
                     )
 
                     if(createNewStream.isFailed){
