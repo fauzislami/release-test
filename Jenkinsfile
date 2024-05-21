@@ -8,6 +8,7 @@ pipeline {
             steps {
                 def workspace = env.WORKSPACE
                 sh """
+                echo ${workspace}
                 cd ${workspace}
                 rm -rf * .*
                 """
