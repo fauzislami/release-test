@@ -23,7 +23,7 @@ pipeline {
         // }
         stage('Release to Github') {
             steps {
-                withCredentials([gitUsernamePassword(credentialsId: 'github-personal-pat', passwordVariable: 'GITHUB_TOKEN', usernameVariable: '')]) {
+                withCredentials([usernamePassword(credentialsId: 'github-personal-pat', passwordVariable: 'GITHUB_TOKEN', usernameVariable: '')]) {
                     sh """
                     git config user.email "islamifauzi@gmail.com"
                     git config user.name "fauzislami"
