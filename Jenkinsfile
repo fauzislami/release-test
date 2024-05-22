@@ -6,8 +6,10 @@ pipeline {
         choice choices: ['none', 'cpp', 'unity', 'unreal', 'mainline'], description: 'Engine name', name: 'engine'
 		string( name: 'releaseVersion',  defaultValue: '', description: 'Version to be released')
 	}
+    options {
+        skipDefaultCheckout()
+    }
     agent any
-
     stages {
         stage('Clean up') {
             steps {
@@ -20,6 +22,11 @@ pipeline {
                         """
                     }
                 }
+            }
+        }
+        stage('Checkout scm') {
+            steps {
+                checkout scm
             }
         }
         stage('Release to Github') {
