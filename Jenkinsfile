@@ -9,6 +9,19 @@ pipeline {
     agent any
 
     stages {
+        stage('Clean up') {
+            steps {
+                script{
+                    dir("${env.WORKSPACE}"){
+                        sh """
+                        echo @===================Cleaning up===================@
+                            rm -rf ./*
+                            rm -rf ./.*
+                        """
+                    }
+                }
+            }
+        }
         stage('Release to Github') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github-personal-pat', passwordVariable: 'GITHUB_TOKEN', usernameVariable: '')]) {
