@@ -17,8 +17,7 @@ pipeline {
                     dir("${env.WORKSPACE}"){
                         sh """
                         echo @===================Cleaning up===================@
-                            rm -rf ./*
-                            rm -rf ./.*
+                            find . -mindepth 1 -delete
                         """
                     }
                 }
