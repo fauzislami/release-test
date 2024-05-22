@@ -23,7 +23,7 @@ pipeline {
         // }
         stage('Release to Github') {
             steps {
-                withCredentials([gitUsernamePassword(credentialsId: 'ssh-personal-github')]) {
+                withCredentials([gitUsernamePassword(credentialsId: 'github-personal-pat')]) {
                     sh """
                     git tag -a v0.3.0 -m "test git tag release"
                     """
