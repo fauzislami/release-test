@@ -9,7 +9,7 @@ pipeline {
                 script{
                     def parentStream = "//depotStream/mainline"
                     def childStream = "//depotStream/" + "unreal" + "-" + "v0.3.0"
-                    def createNewStream = sdkRelease(
+                    def createNewStream = p4Release(
                         parentStream: parentStream,
                         childStream: childStream,
                         p4creds: "perforce-local"
