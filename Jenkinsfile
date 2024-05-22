@@ -24,14 +24,14 @@ pipeline {
         stage('Release to Github') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github-personal-pat', passwordVariable: 'GITHUB_TOKEN', usernameVariable: '')]) {
-                    sh """
+                    sh '''
                     git config user.email "islamifauzi@gmail.com"
                     git config user.name "fauzislami"
 
                     echo "@==========Create tag"==========@"
-                    git config --global --replace-all url.https://${GITHUB_TOKEN}:x-oauth-basic@github.com/fauzislami/.insteadOf https://github.com/fauzislami/
+                    git config --global --replace-all url.https://$GITHUB_TOKEN:x-oauth-basic@github.com/fauzislami/.insteadOf https://github.com/fauzislami/
                     git tag -a v0.3.0 -m "test git tag release"
-                    """
+                    '''
                 }
             }
         }
