@@ -46,7 +46,8 @@ pipeline {
         stage('Release to Perforce') {
             steps{
                 script{
-                    def parentStream = "//${params.project}/${params.engine}"
+                    // def parentStream = "//${params.project}/${params.engine}"
+                    def parentStream = "//${params.project}/mainline"
                     def childStream = "//${params.project}/" + "${params.engine}" + "-" + "${params.releaseVersion}"
                     def createNewStream = p4Release(
                         parentStream: parentStream,
