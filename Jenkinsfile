@@ -50,15 +50,17 @@ pipeline {
                     // def parentStream = "//${params.project}/${params.engine}"
                     def parentStream = "//${params.project}/mainline"
                     def childStream = "//${params.project}/" + "${params.engine}" + "-" + "${params.releaseVersion}"
+                    def description = "${params.releaseDescription}"
                     def createNewStream = p4Release(
                         parentStream: parentStream,
                         childStream: childStream,
                         p4Creds: "perforce-local",
-                        p4Desc: "${params.releaseDescription}"
+                        p4Desc: description
                     )
 
                     if(createNewStream.isFailed){
                         println("Stream is not created due to an error:\n\n${createNewStream.error}")
+                        exit 1
                     }
                 }
             }
