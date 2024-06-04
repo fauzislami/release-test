@@ -47,6 +47,7 @@ pipeline {
                     echo "@==========Create release branch==========@"
                     git branch release-${params.releaseVersion}
                     git push origin -u release-${params.releaseVersion}
+                    git status
 
 
                     echo "@==========Create tag==========@"
