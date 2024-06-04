@@ -38,7 +38,7 @@ pipeline {
 
                     echo "@==========Create tag==========@"
                     git config --global --replace-all url.https://${GITHUB_TOKEN}:x-oauth-basic@github.com/fauzislami/.insteadOf https://github.com/fauzislami/
-                    git tag -a ${params.releaseVersion} -m "test git tag"
+                    git tag -a ${params.releaseVersion} -m "${params.releaseDescription}"
                     git push origin ${params.releaseVersion}
                     """
                 }
