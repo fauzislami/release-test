@@ -12,7 +12,7 @@ pipeline {
     }
     agent any
     stages {
-        stage('Clean up') {
+/*        stage('Clean up') {
             steps {
                 script{
                     dir("${env.WORKSPACE}"){
@@ -21,6 +21,14 @@ pipeline {
                             find . -mindepth 1 -delete
                         """
                     }
+                }
+            }
+        }
+*/
+       stage('Clean up') {
+            steps {
+                script{
+                    cleanWs()
                 }
             }
         }
