@@ -52,7 +52,8 @@ pipeline {
                     def createNewStream = p4Release(
                         parentStream: parentStream,
                         childStream: childStream,
-                        p4creds: "perforce-local"
+                        p4Creds: "perforce-local",
+                        p4Desc: "New release has created"
                     )
 
                     if(createNewStream.isFailed){
