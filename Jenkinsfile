@@ -5,6 +5,7 @@ pipeline {
 		choice choices: ['none', 'dna-client-library', 'dna-trusted-library', 'depotStream'], description: 'Choose which project to be released', name: 'project'
         choice choices: ['none', 'cpp', 'unity', 'unreal', 'mainline'], description: 'Engine name', name: 'engine'
 		string( name: 'releaseVersion',  defaultValue: '', description: 'Version to be released')
+        string( name: 'releaseDescription',  defaultValue: '', description: 'Description of release stream')
 	}
     options {
         skipDefaultCheckout()
@@ -53,7 +54,7 @@ pipeline {
                         parentStream: parentStream,
                         childStream: childStream,
                         p4Creds: "perforce-local",
-                        p4Desc: "New release has created"
+                        p4Desc: "${params.releaseDescription}"
                     )
 
                     if(createNewStream.isFailed){
