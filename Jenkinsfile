@@ -60,7 +60,7 @@ pipeline {
 
                     if(createNewStream.isFailed){
                         println("Stream is not created due to an error:\n\n${createNewStream.error}")
-                        exit 1
+                        error()
                     }
                 }
             }
