@@ -37,7 +37,12 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Release to Github') {
+        stage('Print string') {
+            steps {
+                println "test"
+            }
+        }
+/*        stage('Release to Github') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github-personal-pat', passwordVariable: 'GITHUB_TOKEN', usernameVariable: '')]) {
                     sh """
@@ -58,7 +63,8 @@ pipeline {
                 }
             }
         }
-        stage('Release to Perforce') {
+*/            
+/*        stage('Release to Perforce') {
             steps{
                 script{
                     // def parentStream = "//${params.project}/${params.engine}"
@@ -77,5 +83,6 @@ pipeline {
                 }
             }
         }
+*/
     }
 }
