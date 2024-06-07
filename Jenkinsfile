@@ -40,6 +40,9 @@ pipeline {
         stage('Print string') {
             steps {
                 println "test"
+                sh """
+                    cat dummy
+                """
             }
         }
 /*        stage('Release to Github') {
