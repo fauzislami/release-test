@@ -42,6 +42,7 @@ pipeline {
                 println "test"
                 sh """
                     cat dummy
+                    echo ${env.CHANGE_FORK}
                 """
             }
         }
