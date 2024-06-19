@@ -4,7 +4,8 @@ pipeline {
 	parameters {
 		choice choices: ['none', 'dna-client-library', 'dna-trusted-library', 'depotStream'], description: 'Choose which project to be released', name: 'project'
         choice choices: ['none', 'cpp', 'unity', 'unreal', 'mainline'], description: 'Engine name', name: 'engine'
-		string( name: 'releaseVersion',  defaultValue: '', description: 'Version to be released')
+		string( name: 'releaseVersion',  defaultValue: '', description: 'release version to be released')
+        string( name: 'buildVersion',  defaultValue: '', description: 'build version to be released')
         string( name: 'releaseDescription',  defaultValue: '', description: 'Description of release stream')
         booleanParam('preRelease')
         booleanParam('hotfix')
