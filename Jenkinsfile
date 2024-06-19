@@ -41,7 +41,7 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Print string') {
+/*        stage('Print string') {
             steps {
                 println "test"
                 sh """
@@ -56,6 +56,7 @@ pipeline {
                 
                     // Determine the tag and title based on preRelease parameter
                     def tagPrefix = params.preRelease == true ? "pre-" : ""
+                    def preReleaseFlag = params.preRelease == true ? "--pre-release" : ""
 
                     println "@==========Create tag==========@"
                     sh"""
@@ -69,28 +70,54 @@ pipeline {
                 }
             }
         }
-/*        stage('Release to Github') {
+*/
+        stage('Release to Github') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'github-personal-pat', passwordVariable: 'GITHUB_TOKEN', usernameVariable: '')]) {
-                    sh """
-                    git config user.email "islamifauzi@gmail.com"
-                    git config user.name "fauzislami"
+                    script{
+                        // Determine the tag and title based on preRelease parameter
+                        def tagPrefix = params.preRelease == true ? "pre-" : ""
+                        def preReleaseFlag = params.preRelease == true ? "--pre-release" : ""
 
-                    echo "@==========Create release branch==========@"
-                    git branch release-${params.releaseVersion}
-                    git push origin -u release-${params.releaseVersion}
-                    git status
+                        println "@==========Setup Git==========@"
+                        sh """
+                        git config user.email "islamifauzi@gmail.com"
+                        git config user.name "fauzislami"
+                        """
+                        if (params.hotfix != true && params.preRelease != true){
+                            println "@==========Create release branch==========@"
+                            sh"""
+                            git branch release-${params.releaseVersion}
+                            git push origin -u release-${params.releaseVersion}
+                            git status                    
+                            """
+                        }
+
+                        println "@==========Create tag==========@"
+                        sh"""
+                        git tag -a ${tagPrefix}${params.releaseVersion}-${params.buildVersion} -m "${params.releaseDescription}"
+                        git push origin ${params.releaseVersion}-${params.buildVersion}
+                        """
+
+                        println "@==========Create github release==========@"
+                        sh"""
+                        curl -L https://github.com/github-release/github-release/releases/download/v0.10.0/linux-amd64-github-release.bz2 -o /tmp/gh-release.bz2
+                        bzip2 -d /tmp/gh-release.bz2
+                        chmod +x /tmp/gh-release
+                        /tmp/gh-release release -u fauzislami -r release-test --tag ${tagPrefix}${params.releaseVersion}-${params.buildVersion} --name "${params.releaseTitle}" --description "${params.releaseDescription} ${preReleaseFlag}"
+                        rm -f /tmp/gh-release
+                        """
 
 
-                    echo "@==========Create tag==========@"
-                    git config --global --replace-all url.https://${GITHUB_TOKEN}:x-oauth-basic@github.com/fauzislami/.insteadOf https://github.com/fauzislami/
-                    git tag -a ${params.releaseVersion} -m "${params.releaseDescription}" release-${params.releaseVersion}
-                    git push origin ${params.releaseVersion}
-                    """
+                        // echo "@==========Create tag==========@"
+                        // git config --global --replace-all url.https://${GITHUB_TOKEN}:x-oauth-basic@github.com/fauzislami/.insteadOf https://github.com/fauzislami/
+                        // git tag -a ${params.releaseVersion} -m "${params.releaseDescription}" release-${params.releaseVersion}
+                        // git push origin ${params.releaseVersion}
+                        // """
+                    }
                 }
             }
-        }
-*/            
+        }       
 /*        stage('Release to Perforce') {
             steps{
                 script{
