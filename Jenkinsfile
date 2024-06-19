@@ -102,7 +102,7 @@ pipeline {
                         println "@==========Create github release==========@"
                         sh"""
                         chmod +x /home/gh-release
-                        /home/gh-release release -u fauzislami -r release-test --tag ${tagPrefix}${params.releaseVersion}-${params.buildVersion} --name "(${tagPrefix}) - ${params.releaseTitle}" --description "${params.releaseDescription}" ${preReleaseFlag}
+                        /home/gh-release release -u fauzislami -r release-test --tag ${tagPrefix}${params.releaseVersion}-${params.buildVersion} --name "${tagPrefix.toUpperCase()}${params.releaseTitle}" --description "${params.releaseDescription}" ${preReleaseFlag}
                         rm -f /tmp/gh-release
                         """
 
