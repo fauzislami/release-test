@@ -46,6 +46,11 @@ pipeline {
                     echo ${env.CHANGE_FORK}
                     echo ${params.preRelease}
                 """
+                script{
+                    if(parmas.project == "dna-client-library" || params.preRelease != true){
+                        println "helloWorld"
+                    }
+                }
             }
         }
 /*        stage('Release to Github') {
