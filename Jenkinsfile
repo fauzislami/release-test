@@ -96,7 +96,7 @@ pipeline {
                         println "@==========Create tag==========@"
                         sh"""
                         git tag -a ${tagPrefix}${params.releaseVersion}-${params.buildVersion} -m "${params.releaseDescription}"
-                        git push origin ${params.releaseVersion}-${params.buildVersion}
+                        git push origin ${tagPrefix}${params.releaseVersion}-${params.buildVersion}
                         """
 
                         println "@==========Create github release==========@"
