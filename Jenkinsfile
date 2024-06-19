@@ -44,6 +44,7 @@ pipeline {
                 sh """
                     cat dummy
                     echo ${env.CHANGE_FORK}
+                    echo ${params.Pre-release}
                 """
             }
         }
