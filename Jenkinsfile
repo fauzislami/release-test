@@ -1,7 +1,5 @@
 @Library('MyTestLibrary') _
 
-def tagPrefix
-
 pipeline {
 	parameters {
 		choice choices: ['none', 'dna-client-library', 'dna-trusted-library', 'depotStream'], description: 'Choose which project to be released', name: 'project'
@@ -55,20 +53,20 @@ pipeline {
                     if (params.hotfix != true && params.preRelease != true){
                         println "helloWorld"
                     }
-                }
                 
-                // Determine the tag and title based on preRelease parameter
-                tagPrefix = params.preRelease == "true" ? "pre-" : ""
+                    // Determine the tag and title based on preRelease parameter
+                    def tagPrefix = params.preRelease == "true" ? "pre-" : ""
 
-                println "@==========Create tag==========@"
-                sh"""
-                    echo "tag name: ${tagPrefix}${params.releaseVersion}-${params.buildVersion}"
-                """
+                    println "@==========Create tag==========@"
+                    sh"""
+                        echo "tag name: ${tagPrefix}${params.releaseVersion}-${params.buildVersion}"
+                    """
 
-                println "@==========Create github release==========@"
-                sh"""
-                    echo "release title : ${tagPrefix}${params.releaseTitle}"
-                """
+                    println "@==========Create github release==========@"
+                    sh"""
+                        echo "release title : ${tagPrefix}${params.releaseTitle}"
+                    """
+                }
             }
         }
 /*        stage('Release to Github') {
