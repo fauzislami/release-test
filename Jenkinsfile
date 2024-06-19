@@ -101,6 +101,7 @@ pipeline {
 
                         println "@==========Create github release==========@"
                         sh"""
+                        chmod +x /tmp/gh-release
                         /tmp/gh-release release -u fauzislami -r release-test --tag ${tagPrefix}${params.releaseVersion}-${params.buildVersion} --name "${params.releaseTitle}" --description "${params.releaseDescription} ${preReleaseFlag}"
                         rm -f /tmp/gh-release
                         """
