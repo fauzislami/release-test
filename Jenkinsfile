@@ -48,7 +48,7 @@ pipeline {
                     echo ${params.preRelease}
                 """
                 script{
-                    if (!(params.hotfix != true || params.preRelease == true)){
+                    if (params.hotfix != true || params.preRelease == true){
                         println "helloWorld"
                     }
                 }
