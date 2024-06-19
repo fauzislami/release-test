@@ -101,9 +101,6 @@ pipeline {
 
                         println "@==========Create github release==========@"
                         sh"""
-                        curl -L https://github.com/github-release/github-release/releases/download/v0.10.0/linux-amd64-github-release.bz2 -o /tmp/gh-release.bz2
-                        bzip2 -d /tmp/gh-release.bz2
-                        chmod +x /tmp/gh-release
                         /tmp/gh-release release -u fauzislami -r release-test --tag ${tagPrefix}${params.releaseVersion}-${params.buildVersion} --name "${params.releaseTitle}" --description "${params.releaseDescription} ${preReleaseFlag}"
                         rm -f /tmp/gh-release
                         """
