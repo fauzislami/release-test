@@ -55,7 +55,7 @@ pipeline {
                     }
                 
                     // Determine the tag and title based on preRelease parameter
-                    def tagPrefix = params.preRelease == "true" ? "pre-" : ""
+                    def tagPrefix = params.preRelease == true ? "pre-" : ""
 
                     println "@==========Create tag==========@"
                     sh"""
