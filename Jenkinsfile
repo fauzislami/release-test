@@ -1,5 +1,7 @@
 @Library('MyTestLibrary') _
 
+def tagPrefix
+
 pipeline {
 	parameters {
 		choice choices: ['none', 'dna-client-library', 'dna-trusted-library', 'depotStream'], description: 'Choose which project to be released', name: 'project'
@@ -56,7 +58,7 @@ pipeline {
                 }
                 
                 // Determine the tag and title based on preRelease parameter
-                def tagPrefix = params.preRelease == "true" ? "pre-" : ""
+                tagPrefix = params.preRelease == "true" ? "pre-" : ""
 
                 println "@==========Create tag==========@"
                 sh"""
