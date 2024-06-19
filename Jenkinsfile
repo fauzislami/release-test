@@ -117,22 +117,29 @@ pipeline {
             }
         }       
         stage('Release to Perforce') {
+            when {
+                expression {
+                    currentBuild.resultIsBetterOrEqualTo('SUCCESS') && params.engine != 'javascript' && params.preRelease != true
+                }
+            }
             steps{
                 script{
-                    println "release to perforce"
-                    // // def parentStream = "//${params.project}/${params.engine}"
-                    // def parentStream = "//${params.project}/mainline"
-                    // def childStream = "//${params.project}/" + "${params.engine}" + "-" + "${params.releaseVersion}"
-                    // def createNewStream = p4Release(
-                    //     parentStream: parentStream,
-                    //     childStream: childStream,
-                    //     p4Creds: "perforce-local",
-                    // )
+                    if (params.preRelease != true){
+                        println "release to perforce"
+                        // // def parentStream = "//${params.project}/${params.engine}"
+                        // def parentStream = "//${params.project}/mainline"
+                        // def childStream = "//${params.project}/" + "${params.engine}" + "-" + "${params.releaseVersion}"
+                        // def createNewStream = p4Release(
+                        //     parentStream: parentStream,
+                        //     childStream: childStream,
+                        //     p4Creds: "perforce-local",
+                        // )
 
-                    // if(createNewStream.isFailed){
-                    //     println("Stream is not created due to an error:\n\n${createNewStream.error}")
-                    //     error()
-                    // }
+                        // if(createNewStream.isFailed){
+                        //     println("Stream is not created due to an error:\n\n${createNewStream.error}")
+                        //     error()
+                        // }
+                    }
                 }
             }
         }
