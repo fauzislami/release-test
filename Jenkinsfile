@@ -7,6 +7,7 @@ pipeline {
 		string( name: 'releaseVersion',  defaultValue: '', description: 'Version to be released')
         string( name: 'releaseDescription',  defaultValue: '', description: 'Description of release stream')
         booleanParam('preRelease')
+        booleanParam('hotfix')
 	}
     options {
         skipDefaultCheckout()
@@ -47,7 +48,7 @@ pipeline {
                     echo ${params.preRelease}
                 """
                 script{
-                    if(params.project != "dna-client-library" || params.preRelease != true){
+                    if(params.hotfix != true || params.preRelease != true){
                         println "helloWorld"
                     }
                 }
