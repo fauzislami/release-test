@@ -6,7 +6,7 @@ pipeline {
         choice choices: ['none', 'cpp', 'unity', 'unreal', 'mainline'], description: 'Engine name', name: 'engine'
 		string( name: 'releaseVersion',  defaultValue: '', description: 'Version to be released')
         string( name: 'releaseDescription',  defaultValue: '', description: 'Description of release stream')
-        booleanParam('Pre-release')
+        booleanParam('preRelease')
 	}
     options {
         skipDefaultCheckout()
@@ -44,7 +44,7 @@ pipeline {
                 sh """
                     cat dummy
                     echo ${env.CHANGE_FORK}
-                    echo ${params.'Pre-release'}
+                    echo ${params.preRelease}
                 """
             }
         }
