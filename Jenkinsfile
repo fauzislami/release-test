@@ -7,6 +7,7 @@ pipeline {
 		string( name: 'releaseVersion',  defaultValue: '', description: 'release version to be released')
         string( name: 'buildVersion',  defaultValue: '', description: 'build version to be released')
         string( name: 'releaseDescription',  defaultValue: '', description: 'Description of release stream')
+        string( name: 'releaseTitle',  defaultValue: '', description: 'release title')
         booleanParam('preRelease')
         booleanParam('hotfix')
 	}
@@ -53,6 +54,19 @@ pipeline {
                         println "helloWorld"
                     }
                 }
+                
+                // Determine the tag and title based on preRelease parameter
+                def tagPrefix = params.preRelease == "true" ? "pre-" : ""
+
+                println "@==========Create tag==========@"
+                sh"""
+                    echo "tag name: ${tagPrefix}${params.releaseVersion}-${params.buildVersion}"
+                """
+
+                println "@==========Create github release==========@"
+                sh"""
+                    echo "release title : ${tagPrefix}${params.releaseTitle}"
+                """
             }
         }
 /*        stage('Release to Github') {
