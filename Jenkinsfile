@@ -47,7 +47,7 @@ pipeline {
                     echo ${params.preRelease}
                 """
                 script{
-                    if(params.project == "dna-client-library" || params.preRelease != true){
+                    if(params.project != "dna-client-library" || params.preRelease != true){
                         println "helloWorld"
                     }
                 }
